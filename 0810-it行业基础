@@ -208,4 +208,54 @@ i.抓包
 			时间
 			服务器软件版本
 		响应体信息
-
+	5>断点调试
+		bpu http://192.168.4.222/ecshop1
+		bpu
+		bpu http://192.168.4.222/ecshop1/user.php
+========================================================================
+j.常见的数据库软件
+	oracle
+	mysql
+	sqlserver
+	mongodb 
+k.mysql基础
+	1>mysql的服务
+		mysql     mysql 的客户端服务
+		mysqld    mysql 的服务端服务
+	2>检查mysql服务和端口
+		win+r--cmd--tasklist | find "mysqld"
+		win+r--cmd--netstat -an | find "3306"
+	3>理论
+		数据库分为数据库软件和数据库数据，常说的数据库是数据库数据
+		数据库是由表组成
+		表是由数据组成
+		mysql的管理员是root
+	4>登录mysql(命令提示符)
+		41>登录命令
+			mysql
+				登录本地数据库
+			mysql -u root -p
+				管理员登录本地数据库
+			mysql -h 127.0.0.1 -u root -p
+				管理员登录IP地址为127.0.0.1的数据库
+		42>登录方式
+			1)进入到命令所在文件夹
+				d:
+				cd phpStudy\MySQL\bin
+			2)设置环境变量
+				计算机--属性--高级--环境变量--系统变量--Path中添加mysql的bin文件夹路径
+				;D:\phpStudy\MySQL\bin
+				确定--确定--确定
+	5>基础命令
+		show databases;
+			查看当前软件中有哪些数据库
+		select database();
+			查看当前数据库的名字
+			null代表空，没有选择任何一个数据库
+		use test;
+			当前数据库切换为test
+		show tables;
+			查看当前数据库中有哪些表
+		select * from ecs_goods\G
+		select * from ecs_goods;
+			查看ecs_goods表中有哪些数据
