@@ -41,8 +41,83 @@ tel:18028768679
 		s:服务器
 			性能非常NB的电脑
 		测试需要注意:不同操作系统，不同位数的安装和反安装
+2.前端和后端
+	a.前端
+		html  标记性语言 静态网页(服务器上什么样子，在网页上就什么样子)  
+		css   样式表     页面美化
+		js    javascript 动态网页(动画\交互)
+			  java       后端开发语言
+		UI    用户接口   美工
+	b.b/s架构的后端
+		操作系统
+			unix     macos ios aix
+			linux    安卓   redhat  centos
+			windows  winserver  win7  win10 
+		web服务器
+			apache    不支持java
+			nginx     轻量级web服务器(反向代理、负载均衡)
+			tomcat    java
+			iis       微软
+		数据库服务器
+			oracle    
+			mysql    
+			sqlserver
+c.常见搭配
+	操作系统             web服务器            数据库服务器
+	win                  apache               mysql
+	                       iis                sqlserver
+	                     tomcat               mysql/oracle
+	linux                apache               mysql            LAMP(linux apache mysql php)
+	                     nginx                mysql            LNMP(linux nginx mysql php)
+	                     tomcat               mysql/oracle
+d.集成软件
+	xampp
+		x:任意操作系统
+		a:apache
+		m:mysql
+		p:php
+		p:perl
+	wamp
+		w:windows
+	phpstudy  
+e.phpstudy
+	安装:傻瓜安装
+	1>检查系统的进程
+		win+r--cmd--tasklist | find "mysqld"
+		win+r--cmd  打开命令提示符
+		tasklist    查看系统中所有进程
+		|           管道，前面的输出作为后面的输入
+		find        搜索
+		mysqld      mysql的主服务
+		win+r--cmd--tasklist | find "httpd"
+	2>检查端口
+		apache:  80
+		mysql :  3306
+		win+r--cmd--netstat -an | find "3306"
+		0.0.0.0   任意IP地址
+		127.0.0.1==localhost   电脑本机
+	3>文件夹简介
+		apache           web服务器所在位置
+			bin          apache的命令所在位置
+			conf         apache的配置文件所在位置
+			logs         apache的日志文件所在位置
+			httpd.conf   apache的配置文件
+		mysql
+			bin          mysql的命令所在位置
+			data         mysql的数据存放位置
+			my.ini       mysql的配置文件
+		WWW
+			项目源码所在位置
 
-
-
-
+f.安装部署ecshop网上商城
+	1>启动phpstudy
+	2>解压ecshop.zip到WWW文件夹中
+	3>启动apche、mysql
+	4>浏览器中输入127.0.0.1/ecshop1按照提示安装
+		配置系统需要注意:
+		数据库主机:localhost
+		端口号    :3306
+		用户名    :root
+		密码      :root
+		数据库名  ：test
 
