@@ -259,3 +259,31 @@ k.mysql基础
 		select * from ecs_goods\G
 		select * from ecs_goods;
 			查看ecs_goods表中有哪些数据
+l.表结构
+	1>数据类型
+		字符            'abc' '123'    char varchar
+		数值            123  100       int
+		日期类型         '2000-01-01'   date
+	2>表结构的创建
+		语法:create table 表(
+				列  数据类型，
+				列  数据类型
+		);
+		需求:创建表商品(goods),商品名称(name)字符类型，最多10个字符，价格(price)数值类型,出厂日期(ddate)日期类型
+		create table goods(
+			name char(10),
+			price int,
+			ddate date
+		);
+	3>查看表结构
+		desc 表名;
+		需求:查看goods表表结构
+			desc goods;
+	4>表结构的删除
+		语法:drop table 表;
+		需求:删除goods表
+			drop table goods;
+			
+
+
+
