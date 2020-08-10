@@ -137,10 +137,8 @@ h.URL(统一资源定位器)
 		一组规则规范
 		http协议(超文本传输协议)
 		规定了数据在传输中先传输什么，后传输什么，怎样传输
-
 		超文本(富文本)(有图有真相[声音、图像、视频])
 		普通文本
-
 		http协议的请求
 			get   我要什么，主要用于浏览，请求的信息显示在url上
 				https://s.taobao.com/search?q=lv&imgfile=&commend=all&ssid=s5-e&search_type=item&sourceId=tb.index&spm=a21bo.2017.201856-taobao-item.1&ie=utf8&initiative_id=tbindexz_20170306
@@ -156,15 +154,58 @@ h.URL(统一资源定位器)
 			302     3开头，移动或者缓存(重定向)
 			404     4开头，客户端请求有问题
 			500     5开头，服务端有问题
-
-
 	2>域名/IP地址
 		127.0.0.1
+		域名(FQDN)
+		域名解析(dns)
+		正向解析(域名--IP)
+			win+r--cmd--ping www.baidu.com
+			win+r--cmd--nslookup www.baidu.com
+		反向解析(IP--域名)
+			win+r--cmd--nslookup  14.215.177.38
 	3>端口
 		:80
 		注意:80端口在网页中不显示
+		区分应用层进程的标识
+		常用软件端口
+			apache/nginx/iis   80
+			tomcat             8080
+			oracle             1521
+			mysql              3306
 	4>虚拟目录
 	5>访问文件
 		goods.php
 	6>访问参数
 		?id=74
+i.抓包
+	1>常用抓包工具
+		F12
+		httpwatch
+		fiddler
+		wireshark
+	2>抓包实例
+	3>抓包原理
+		中间人原理
+	4>抓包数据
+		基础信息
+			文件名字
+			状态码
+			文件类型
+			参考页面
+			文件大小
+			加载时间
+		请求头信息
+			请求地址
+			请求方式
+			可以解析的文件类型
+			除文本外文件压缩方式
+			语言
+			cookie
+			客户端信息
+		请求体信息
+		响应头信息
+			状态码
+			时间
+			服务器软件版本
+		响应体信息
+
