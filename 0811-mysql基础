@@ -126,7 +126,38 @@
 			或者的关系
 			需求:查询ecs_goods表中商品名称是KD876或者诺基亚的所有信息
 			select * from ecs_goods where goods_name in('KD876','诺基亚');
-			
+
+
+5.子查询
+	一条SQL语句的执行依赖于另外一条SQL语句的执行结果
+	需求:查询ecs_goods表中最高本店售价的人的名字
+		max()  最大
+		查询ecs_goods表中最高本店售价是多少
+		select max(shop_price) from ecs_goods;
+		查询ecs_goods表中本店售价是上面查询出来结果的人的名字
+		select goods_name from ecs_goods where shop_price=(select max(shop_price) from ecs_goods);
+	子查询可以用于数据的新增、数据的修改、数据的删除
+	子查询分为单行子查询和多行子查询
+		单行子查询:查询子句返回的结果是一条，可以用=或者in
+		多行子查询:查询子句返回的结果是多条，in
+	需求:查询商品名称是KD876的分类名称
+		分析列:
+			商品名称
+			分类名称
+		分析表:
+			ecs_goods
+			ecs_category
+		拆分
+			查询ecs_goods表中满足条件的cat_id
+				select cat_id from ecs_goods where goods_name='KD876';
+			查询ecs_category表中cat_id为上面查询结果的分类名称
+				select cat_name from ecs_category where cat_id=(select cat_id from ecs_goods where goods_name='KD876');
+	需求:查询商品本店售价低于1000的商品的分类名称
+		查询ecs_goods表中满足条件的cat_id
+			select cat_id from ecs_goods where shop_price<1000;
+		查询ecs_category表中cat_id为上面查询结果的分类名称
+			select cat_name from ecs_category where cat_id in (select cat_id from ecs_goods where shop_price<1000);
+
 
 
 
