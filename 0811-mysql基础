@@ -1,0 +1,68 @@
+1.表结构
+	a.创建表结构
+	b.查看表结构
+	c.删除表结构
+	d.修改表结构
+		1>增加列
+			需求:emp表中新增一个列，id 数值类型
+				alter table emp add id int;
+		2>修改列
+			需求:emp表中修改id的数据类型为char(10)
+				alter table emp modify id char(10);
+		3>删除列
+			需求:emp表中删除id列
+				alter table emp drop column id;	
+	e.约束
+		主键约束  列中的数据是唯一的，不能为空，每张表中只能有一个主键
+		唯一约束  列中的数据是唯一的，可以为空，作为主键约束的补充
+		检查约束  列中的数据是否满足条件
+		非空约束  列中的数据不为空
+		外键约束  列中的数据依赖于另外一张表中的数据
+2.SQL(结构化查询语言)
+	DDL:数据库定义语言  create alter drop truncate
+	DML:数据库操作语言  insert update delete
+	DCL:数据库控制语言  grant revoke
+	DQL:数据库查询语言  select
+3.数据的新增、修改、删除
+	字符类型需要加单引号
+	数值类型直接使用
+	日期类型需要加单引号
+	a.数据的新增
+		a1>向指定列新增数据
+			语法:insert into 表(列1,列2...) values(值1,值2....);
+			需求:向emp表中新增数据，员工名字 o8ma,员工年龄 18
+				insert into emp(age,name) values(18,'o8ma');
+		a2>向所有列新增数据
+			语法:insert into 表 values(值1,值2....);
+			需求:向emp表中新增数据，名字ladeng，年龄100，生日2000-01-01
+				insert into emp values('ladeng',100,'2000-01-01');
+	b.数据的修改
+		语法:update 表名 set 列=值 where 条件;
+		where 条件是和行相关内容，用于筛选数据
+		如果不加where条件，默认修改的是整个列的数据
+		如果增加where条件，默认修改的是指定行的列的数据
+			需求:修改emp表中名字是o8ma的年龄修改为0
+				update emp set age=0 where name='o8ma';
+			需求:修改emp表中生日都为2020-01-01
+				update emp set birthday='2020-01-01';
+	c.数据的删除
+		truncate DDL,截断表，只能删除所有数据，删除数据无法找回
+		delete   DML，可以删除指定数据，也可以删除所有数据，删除数据可以找回
+		c1>delete
+			语法:delete from 表 where 条件;
+			需求:删除emp表中名字是o8ma的所有数据
+				delete from emp where name='o8ma';
+			需求:删除emp表中所有数据
+				delete from emp;
+		c2>truncate
+			语法:truncate table 表;
+			需求:删除emp表中所有数据
+				truncate table emp;
+				
+
+
+
+
+
+
+
