@@ -32,7 +32,6 @@
 			select country_id from country where country like 'C%';
 		2>查询城市表中country_id是上面查询出来结果的城市名称
 			select city from city where country_id in (select country_id from country where country like 'C%');
-
 	查询客户表中名字为MARY的所在城市?
 		1>查询客户表中满足条件的address_id
 			select address_id from customer where first_name='MARY';
@@ -40,5 +39,65 @@
 			select city_id from address where address_id in (select address_id from customer where first_name='MARY') ;
 		3>查询城市表中city_id是上面查询出来结果的城市名称
 			select city from city where city_id in (select city_id from address where address_id in (select address_id from customer where first_name='MARY'));
-
 	查询客户表中名字为MARY的所在国家?
+		1>查询客户表中满足条件的address_id
+			select address_id from customer where first_name='MARY';
+		2>查询地址表表中address_id是上面查询出来结果的city_id
+			select city_id from address where address_id in (select address_id from customer where first_name='MARY') ;
+		3>查询城市表中city_id为上面查询出来结果的country_id
+			select country_id from city where city_id in (select city_id from address where address_id in (select address_id from customer where first_name='MARY'));
+		4>查询国家表中country_id为上面查询出来的结果的country
+			select country from country where country_id in (select country_id from city where city_id in (select city_id from address where address_id in (select address_id from customer where first_name='MARY')));
+3.多表查询
+	一张表无法满足条件时候使用多张表
+	a.笛卡尔积
+		两张表不做任何关联产生的数据,导致数据量成倍增加，无效数据增加，引入内联查询、左联查询、右联查询
+
+		ecs_goods      商品
+		ecs_category   分类名
+		select * from ecs_goods;
+		select * from ecs_category;
+		select * from ecs_category,ecs_goods;
+	b.内联查询
+		语法:
+		select 列 from 表1，表2 where 表1.列=表2.列;
+		select 列 from 表1 inner join 表2 on 表1.列=表2.列;
+		关联列判断
+			1.名字相同
+			2.作用相同
+			3.主外键关系
+		需求:查询商品名称是KD876的分类名称
+		1>分析列
+			商品名称
+			分类名称
+		2>分析表
+			商品名称  ecs_goods
+			分类名称  ecs_category
+		3>关联
+			select * from ecs_category,ecs_goods
+			where ecs_category.cat_id=ecs_goods.cat_id;
+		4>过滤
+			select cat_name from ecs_category,ecs_goods
+			where ecs_category.cat_id=ecs_goods.cat_id
+			and goods_name='KD876';
+		需求:查询分类名称是3G手机的商品名称有哪些
+		1>分析列
+			分类名称
+			商品名称
+		2>分析表
+			商品名称  ecs_goods
+			分类名称  ecs_category
+		3>关联
+			select * from ecs_goods g,ecs_category c
+			where g.cat_id=c.cat_id;
+		4>过滤
+			select g.goods_name from ecs_goods g,ecs_category c
+			where g.cat_id=c.cat_id
+			and c.cat_name='3G手机';
+
+
+
+
+		
+
+
