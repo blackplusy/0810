@@ -233,6 +233,26 @@ mongodb(大数据库)
 		db.xiyouji.insert({name:'5kong',jingli:{hit:3,kill:1000}})
 		xiyouji集合中新增内嵌文档
 
-
-
+6.文档的修改
+	修改文档
+		$set
+		db.xiyouji.update({age:18},{$set:{age:100}})
+	覆盖文档
+		db.xiyouji.update({age:100},{age:1000000})
+	自增
+		db.xiyouji.update({age:30},{$inc:{age:10}})
+		db.xiyouji.update({age:30},{$inc:{age:-10}})
+	删除指定属性
+		db.xiyouji.update({name:'5kong'},{$unset:{'name':'5kong'}})
+	修改多个文档
+		db.xiyouji.update({age:30},{$set:{name:'gaga'}},{multi:true})
+7.文档的查询
+	查询所有文档
+		 db.xiyouji.find()
+	查询指定文档
+		db.xiyouji.find({name:'gaga'})
+	查询指定属性
+		db.xiyouji.find({},{_id:0,name:1})
+	查询指定文档的指定属性
+		db.xiyouji.find({name:'gaga'},{_id:0,age:1})
 
