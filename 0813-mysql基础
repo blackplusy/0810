@@ -188,6 +188,51 @@ mongodb(大数据库)
 			登录IP地址是127.0.0.1的admin数据库
 		mongo 127.0.0.1:27017/admin
 			登录IP地址是127.0.0.1的端口是27017的admin数据库
+3.基础命令(登录)
+	mysql    mongodb
+	数据库    数据库
+	表        集合
+	数据      文档
+	数据库分为数据库软件和数据库数据
+	show databases
+	show dbs
+		 查看当前有哪些数据库
+	db
+		查看当前数据库的名字
+	use admin
+		当前数据库切换为admin
+	show tables
+	show collections
+		查看当前数据库中有哪些集合
+	db.system.version.find()
+		查看system.version集合中所有文档
+4.CURD(增删改查)
+	文档的新增
+		db.xiyouji.insert({name:'tangsir',age:18})
+		xiyouji集合中新增文档ame:'tangsir',age:18
+	文档的查看
+		db.xiyouji.find({age:18})
+		查看xiyouji集合中age是18的所有文档
+	文档的修改
+		db.xiyouji.update({name:'5kong'},{$set:{age:0}})
+		修改xiyouji集合中名字是5空的age设置为0
+	文档的删除
+		db.xiyouji.remove({name:'5kong'})
+		删除xiyouji集合中name是5kong的所有文档
+5.文档的新增
+	新增普通文档
+		db.xiyouji.insert({name:'niumo'})
+		xiyouji集合中新增name是niumo
+	新增文档指定_id
+		db.xiyouji.insert({_id:0,name:'8jie',age:30})
+		xiyouji集合中新增_id:0,name:'8jie',age:30
+	新增多个文档
+		db.xiyouji.insert([{name:'nezha'},{name:'tai2'},{name:'redhair'}])
+		xiyouji集合中新增3个文档，分别是xxx
+	新增内嵌文档
+		db.xiyouji.insert({name:'5kong',jingli:{hit:3,kill:1000}})
+		xiyouji集合中新增内嵌文档
+
 
 
 
