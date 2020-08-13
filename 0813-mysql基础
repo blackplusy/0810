@@ -1,0 +1,71 @@
+练习--2.jpg
+	1.
+	select s.name  from student s,a achievement a
+	where s.id=a.id
+	and a.mark>85;
+	2.
+	select count(*) from achievement 
+	where mark>=90;
+	3.
+	insert into achievement values((select id from student where name='Robert'),80);
+	4.
+	update achievement set mark=87 where id=(select id from student where name='Rose');
+	5.
+	delete from achievement where id=(select id from student where name='Betty');
+	delete from  student where name='Betty';
+练习--4.jpg
+	1.
+	select s#,grade from sc where c#='C2';
+	2.
+	select sname from s where sname like 'D%';
+	3.
+	select s.s#.s.sname  from s,sc,c
+	where s.s#=sc.s#
+	and   sc.c#=c.c#
+	and c.cname='Maths';
+	4.
+	查询sc课程号是C2的s#
+		select s# from sc where c#='C2';
+	查询s#是上面查询出来结果的同时课程号是C4
+		select s# from sc where s# in (select s# from sc where c#='C2')
+		and c#='C4';
+=========================================================================
+1.分组查询
+	按照某种条件(共同属性)进行分组
+	a.分组函数(聚合函数)
+		通常是和分组一起使用，也可以单独使用
+		max()  		最大值
+		min() 		最小值
+		avg() 		平均值
+		sum() 		求和
+		count() 	计数		
+		需求:查询ecs_goods表中最高本店售价，最低本店售价，平均本店售价
+			select max(shop_price),min(shop_price),avg(shop_price) from ecs_goods;
+		需求:查询ecs_goods表中最高本店售价的商品名称
+			select max(shop_price) from ecs_goods;
+			select goods_name from ecs_goods where shop_price=(select max(shop_price) from ecs_goods);
+	b.分组
+		每后面跟的是分组条件
+		语法:select 列 from 表
+				where 条件
+					group by 分组条件
+						having 分组后过滤条件
+		select cat_id from ecs_goods group by cat_id;                  --Y
+		select cat_id,goods_name from ecs_goods group by cat_id;       --N
+		select * from ecs_goods group by cat_id;                       --N
+		需求:查询ecs_goods表中每种分类id对应多少种商品，要求显示分类id，商品数量
+		select  cat_id,count(goods_name)  from ecs_goods group by cat_id;
+		需求:查询每种分类对应多少商品，要求显示分类名称和商品数量
+		select  *  from ecs_goods g,ecs_category c
+		where g.cat_id=c.cat_id;
+		select  c.cat_name,count(goods_name) from ecs_goods g,ecs_category c
+		where g.cat_id=c.cat_id
+		group by c.cat_name;
+	c.分组后过滤
+		where   分组前过滤，后面不能直接跟分组函数
+		having  分组后过滤，后面可以直接跟分组函数
+		需求:查询商品数量超过5的分类名称
+		select  c.cat_name,count(goods_name) from ecs_goods g,ecs_category c
+		where g.cat_id=c.cat_id
+		group by c.cat_name
+		having count(goods_name)>5;
