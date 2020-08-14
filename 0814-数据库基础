@@ -1,0 +1,51 @@
+1.查询表达式
+	a.比较
+		$gt    	大于
+		$lt  	小于
+		$gte    大于等于
+		$lte    小于等于
+		$ne     不等于
+		db.xiyouji.find({age:{$lt:100}})
+		xiyouji集合中搜索age小于100的文档
+		db.xiyouji.find({age:{$gte:30}})
+		xiyouji集合中age大于等于30的文档
+		db.xiyouji.find({name:{$ne:null}})
+		xiyouji集合中name的值是非空的文档
+	b.关系
+		$and    同时满足
+		$or     满足一个即可
+		$not    不满足条件
+		db.xiyouji.find({$and:[{age:{$lte:100}},{name:'8jie'}]})
+		xiyouji集合中age小于等于100并且名字是8jie的所有文档
+		db.xiyouji.find({$or:[{name:'8jie'},{name:'5kong'}]})
+		xiyouji集合中name是8jie或者name是5空的文档
+	c.存在性
+		$exists
+		db.xiyouji.find({age:{$exists:1}})
+		xiyouji集合中存在age键(属性)的文档
+		db.xiyouji.find({age:{$exists:0}})
+		xiyouji集合中不存在age键(属性)的文档
+	d.数据类型判断
+		$type
+		1:   数值
+		2:   字符
+		3:   对象
+		4:   数组
+		5:   二进制数据
+		7:   对象id
+		8:   布尔
+		9:   日期
+		10:  空值
+		db.xiyouji.find({age:{$type:2}})
+		xiyouji集合中age的值是字符类型的文档
+		db.xiyouji.insert({name:null,age:18})
+		db.xiyouji.find({name:{$type:10}})
+		xiyouji集合中name的值是空类型的文档
+		db.xiyouji.find({name:{$not:{$type:10}}})
+		xiyouji集合中name的值是非空类型的文档
+	e.正则表达式
+		$regex
+		db.xiyouji.find({name:{$regex:/^5/}})
+		xiyouji集合中name的值以5开头的文档
+		db.xiyouji.find({name:{$regex:/a$/}})
+		xiyouji集合中name的值以a结尾的文档
