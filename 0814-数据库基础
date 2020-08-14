@@ -50,6 +50,7 @@
 		db.xiyouji.find({name:{$regex:/a$/}})
 		xiyouji集合中name的值以a结尾的文档
 
+
 emp集合中有以下属性：
    empno    员工号    
    hiredate 入职日期  
@@ -95,10 +96,83 @@ ename:{$regex:/^AL/}
 comm:{$type:10}
 db.emp.find({$or:[{ename:{$regex:/^AL/}},{comm:{$type:10}}]})
 
+
 10.查询emp表中佣金不为空的人并且工资大于800，1500，2000的所有工资的人的所有信息
 $and:[{sal:{$gt:800}},{sal:{$gt:1500}},{sal:{$gt:2000}}]
 comm:{$not:{$type:10}}
 db.emp.find({$and:[{$and:[{sal:{$gt:800}},{sal:{$gt:1500}},{sal:{$gt:2000}}]},{comm:{$not:{$type:10}}}]})
+
+========================================================
+1.常见的数据库软件
+	关系型数据库
+		informix IBM+HP  军、政、运、银 
+		db2      IBM     军、政、运、银
+		oracle   甲骨文   中大型企业
+		mysql    甲骨文   互联网公司
+		sqlserver 微软    传统
+	非关系型数据库
+		mongodb   大数据、分布式
+		redis     缓存、消息队列
+		cassandra facebook
+2.oracle基础
+	虚拟机密码:20110930
+	a.oracle的架构
+		c--------/-------s
+		客户端          服务端
+		tns             oracle的主服务
+						oracle的监听服务
+	b.服务端
+		1>图形化处理
+			计算机--管理--服务和应用程序--服务
+			OracleServiceORCL   oracle的主服务
+			Oracle....listener  oracle的监听服务
+		2>命令处理
+			2.1 oracle的主服务
+				win+r--cmd
+				sqlplus / as sysdba   （sqlplus是oracle的黑白界面工具）
+				管理员登录本地数据库
+				查看数据库的状态
+					select status from v$instance;
+				关闭数据库
+					shutdown immediate;
+				启动数据库
+					startup;
+			2.2 oracle的监听服务
+				win+r--cmd
+				查看监听程序的状态
+					lsnrctl status  
+				关闭监听
+					lsnrctl stop
+				启动监听
+					lsnrctl start
+			2.3 重建oracle监听
+				win+r--cmd--netca
+				监听程序配置--删除--LISTENER--是--下一步
+				监听程序配置--添加--LISTENER--下一步--下一步--否
+	c.客户端
+		TNS配置
+			C:\oracle\product\10.2.0\db_1\NETWORK\ADMIN\tnsnames.ora
+			ORCL =                                                                 标签
+			  (DESCRIPTION =
+			    (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.190.130)(PORT = 1521))   协议、主机名(IP地址)、端口
+			    (CONNECT_DATA =
+			      (SERVER = DEDICATED)
+			      (SERVICE_NAME = orcl)                                             服务名
+			    )
+			  )
+		win下查看IP地址方式
+			win+r--cmd--ipconfig
+		测试tns配置是否正常
+			win+r--cmd--tnsping orcl
+
+
+
+				
+
+
+
+
+
 
 
 
