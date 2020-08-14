@@ -165,6 +165,71 @@ db.emp.find({$and:[{$and:[{sal:{$gt:800}},{sal:{$gt:1500}},{sal:{$gt:2000}}]},{c
 		测试tns配置是否正常
 			win+r--cmd--tnsping orcl
 
+3.oracle的用户
+	a.oracle的管理员
+		sys   system   登录时候选择sysdba角色
+		其他用户通常用normal进行登录
+	b.角色
+		权限的集合
+		sysdba 	管理员权限
+		sysoper 系统操作员权限
+		normal  普通用户权限
+	c.创建用户
+		语法:create user 用户 identified by 密码;
+			需求:创建用户kobe，密码nba
+			create user kobe identified by nba;
+		补充:
+			sqlplus登录方式 
+			sqlplus 用户名/密码
+	d.权限
+		connect   链接数据库权限
+		resource  调用数据库资源权限
+		dba       管理员权限
+		1>授权
+			语法:grant 权限 to 用户;
+				需求:赋予kobe用户connect和resource权限
+					grant connect,resource to kobe;
+		2>回收授权
+			语法:revoke 权限 from 用户;
+				需求:回收kobe的connect权限
+					revoke connect from kobe;
+	e.修改用户
+		修改密码
+			需求:修改kobe用户密码为cba
+				alter user kobe identified by cba;
+		锁定、解锁用户
+			语法:alter user 用户 [identified by 密码] account unlock(lock)
+			需求:解锁用户scott
+				alter user scott account unlock;
+	f.删除用户
+		语法：drop user 用户;
+		需求:删除用户kobe
+			drop user kobe;
+4.表
+	a.数据类型
+		字符类型   char  varchar  varchar2
+		数值类型   number
+		日期类型   date
+	b.表结构的创建
+		语法:create table 表(
+				列 数据类型,
+				列 数据类型，
+				...
+		);
+		需求:创建学生表stu，学生名字name 字符类型，生日 birth 日期类型，年龄 age 整型
+		create table stu(
+			name char(10),
+			birth date,
+			age   number
+		);
+	c.查看表结构
+		1>sqlplus中执行 desc 表名;
+		2>右键表--describe
+		3>右键表--view-columns
+		4>小箭头
+
+
+
 
 
 				
