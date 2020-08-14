@@ -227,7 +227,36 @@ db.emp.find({$and:[{$and:[{sal:{$gt:800}},{sal:{$gt:1500}},{sal:{$gt:2000}}]},{c
 		2>右键表--describe
 		3>右键表--view-columns
 		4>小箭头
+	d.约束
+		主键  列中的数据唯一，每张表中只能有一个，不能为空
+		唯一  列中的数据唯一，作为主键约束的补充，可以为空
+		非空  列中数据不能为空
+		检查  列中的数据是否满足条件
+		外键  列中数据依赖于另外一张表中的列
+		create table 表(
+			列  数据类型 primary key,
+			列  数据类型 unique，
+			列  数据类型 not null,
+			列  数据类型 check(检查条件),
+			列  数据类型 references 被参考表(被参考列)
+		);
+		需求:创建表员工(people),id 主键约束 数值类型,名字(name) 字符类型非空，身份证号(card)唯一约束，性别(sex) 字符类型,只能是男或者女
+			create table people(
+				id number primary key,
+				name char(10)  default '无名氏' not null,
+				card char(40) unique,
+				sex char(4) check(sex='男' or sex='女')
+			);
+		需求:创建表订单(order1)，学生id 数值类型取值于people表中id列，订单信息 info 字符类型
+			create table order1(
+				id number references people(id),
+				info char(10)
+			);
+		查看约束
+			1>右键表--view--xxx
+			2>小箭头
 
+		补充：默认值是default
 
 
 
