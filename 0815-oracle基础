@@ -190,4 +190,25 @@
 			select * from (select t.*,rownum rn from emp t)
 			where rn>=8 and rn<=12;
 
+练习--1.jpg
+	1>select * from test1 where department='计算机系' and place='北京';
+	2>update test1 set department='信息学院' where department='计算机系';
+	3>select t1.no,t1.name,t2.grade,t2.courses  from test1 t1,test2 t2
+	  where t1.no=t2.no
+	  and t1.grade>=75;
+练习--5.bmp
+	1>select avg(english) from mark;
+	2>
+		select m.math,c.name,c.address,c.telno from cust c,mark m
+		where c.studentno=m.studentno
+		and c.studentno in (11,22,33,44,55);
+练习--3.png
+	1>
+		select * from dt_pay where salary>(select avg(salary) from dt_pay);
+	2>
+		select * from dt_pay;
+	3>
+		truncate table dt_pay;
+
+
 
