@@ -1,0 +1,102 @@
+练习--建表测试题目
+	create table 同学表(
+		学号 char(6) primary key,
+		姓名 char(20) not null,
+		性别 char(4) check(性别='男' or 性别='女')，
+		年龄  number not null,
+		民族   char(30) default '汉' not null,
+		身份证号 char(40) unique,
+		宿舍号 char(6) references 宿舍表(宿舍号)
+	);
+
+	create table 宿舍表(
+		宿舍号   char(6) primary key,
+		宿舍电话 number check(宿舍电话>=6330000 and 宿舍电话<=6339999)
+	);
+==========================================================================
+1.SQL分类
+	DDL  数据库定义语言  create alter drop truncate
+	DML  数据库操作语言  insert update delete
+	DCL  数据库控制语言  grant  revoke
+	DQL  数据库查询语言  select
+2.事务
+	一件事有开始就一定有结束
+	我-----------------------------/-----------------------------你们
+	commit;    提交数据到数据库中
+	rollback;  数据库回滚到最后一次提交的状态
+	DML语句会触发事务的开始，开始就要结束
+3.数据的新增、修改、删除
+	字符类型使用单引号
+	数值类型直接使用
+	日期类型需要用to_date()函数
+	a.数据的新增
+		语法:
+		insert into 表(列1,列2...) values(值1,值2....)
+		insert into 表 values(值1,值2....);
+			insert into 韩国(泡菜名称,泡菜价格) values('辣白菜',80);
+			insert into 韩国 values('桔梗',80,sysdate);
+			insert into 韩国 values('酸菜',80,to_date('2000-01-01','YYYY-MM-DD'));
+			insert into 韩国 values('酸菜',80,to_date('2000-01-01 18:00:00','YYYY-MM-DD hh24:mi:ss'));
+	b.数据的修改
+		语法:update 表 set 列=值 where 条件;
+			update 韩国 set 泡菜名称='白菜' where 泡菜名称='酸菜';
+			update 韩国 set 泡菜价格=0;
+	c.数据的删除
+		delete    删除指定数据，删除数据可以找回，DML
+			delete 表 where 条件;
+				delete 韩国 where 泡菜名称='白菜' ;
+				delete 韩国;
+		truncate  截断表，删除整个表的数据，DDL
+			truncate table 表;
+				truncate table 韩国;
+4.数据查询
+	语法:select 列 from 表 where 条件;
+	查询指定行
+		select * from emp where ename='SCOTT';
+
+	查询指定列
+		select ename from emp;
+
+	查询指定行的列
+		select sal from emp where ename='SCOTT';
+
+	查询所有数据
+		select * from emp;
+5.where条件
+	比较
+		>
+		<
+		=
+		>=
+		<=
+		!=
+		<>
+	关系
+		and
+		or
+		not
+	区间
+		between...and...
+	空值
+		is null或者 is not null
+		nvl()函数  nvl2()
+		select comm,nvl(comm,0) from emp;
+		nvl(判断该列是否为空,如果为空显示的值)
+	模糊查询
+		like
+		_
+		%
+		select * from emp where sal like '3%';
+		select * from emp where ename like '______';
+	in
+	常用函数
+		upper()   大写
+		lower()   小写
+		initcap() 首字母大写
+			select ename,lower(ename),initcap(ename) from emp;
+		round()   小数点后保留几位
+			select avg(sal),round(avg(sal),2) from emp;
+		distinct()去重
+			select distinct(deptno) from emp;
+
+
