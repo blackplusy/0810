@@ -153,3 +153,41 @@
 		
 		select e.ename from emp e,(select max(sal) sal from emp) f
 		where e.sal=f.sal;
+8.分组查询
+	语法:select 列 from 表
+			where 条件
+				group by 分组条件
+					having 分组后过滤条件
+	a.聚合函数
+		max()
+		min()
+		avg()
+		sum()
+		count()
+	b.分组
+		双分组:按照两个条件进行分组
+		需求:emp表中每个部门每个岗位的最高薪资是多少？
+		select max(sal),deptno,job from emp group by deptno,job;
+	c.where和having
+		where  分组前过滤，不能直接跟分组函数
+		having 分组后过滤，可以直接跟分组函数
+9.分页和排序
+	a.排序
+		顺序
+			order by 列;
+			order by 列 asc;
+		倒序
+			order by 列 desc;
+		双排序
+		需求:查询emp表中所有数据，按照部门号顺序，员工号倒序排列
+		select * from emp order by deptno,empno desc;
+	b.分页
+		rownum 行号，不属于任何一张表，必须包含1
+		需求:查询emp表中前10行数据
+			select * from emp where rownum<=10;
+		需求:查询emp表中8到12行数据
+			select * from emp where rownum>=8 and rownum<=12;
+			select * from (select t.*,rownum rn from emp t)
+			where rn>=8 and rn<=12;
+
+
