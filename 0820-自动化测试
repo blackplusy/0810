@@ -65,3 +65,25 @@
 		br=webdriver.Chrome()
 
 		br.get("https://www.taobao.com")
+8.selenium定位元素的方法
+	a.查看页面元素
+		浏览器中F12(开发者工具)，点击元素右键检查，查看对应元素前端代码
+	b.id定位
+		对元素的常见操作
+			click()   	点击
+			clear()  	清空
+			send_keys() 发送(输入)内容
+	c.name定位
+	d.class定位
+	e.tag定位
+		html是通过tag来定义功能的，比如input是输入，table是表格等等
+		工作中使用比较少，很难通过tag去区分不同元素
+	f.通过link定位
+		专门定位文本链接，比如百度新闻等等
+	g.通过partial_link定位
+		超链接文本可能会过长，全部输入浪费资源，这种方式叫做模糊匹配
+	h.xpath
+		理想状态下，页面中都会有id\name\class\超链接等等，实际情况不是，属性相同，刷新页面后值都会变化
+	i.css定位
+		相对于xpath更简洁，速度更快
+		
