@@ -86,4 +86,58 @@
 		理想状态下，页面中都会有id\name\class\超链接等等，实际情况不是，属性相同，刷新页面后值都会变化
 	i.css定位
 		相对于xpath更简洁，速度更快
-		
+9.部署ecshop网店项目
+	ecshop环境
+	开发语言：php
+	web服务器：apache
+	数据库服务器:mysql
+	a.下载安装phpstudy(集成软件)【2016】
+	b.文件夹简介
+		mysql：  数据库文件所在位置
+			bin： 存放mysql命令的位置
+			data: 存放mysql数据的位置
+			my.ini:mysql的配置文件
+		apache:  web服务器文件所在位置
+			bin:  存放apache命令的位置
+			conf: 存放apache配置文件的位置
+			logs: 存放apache日志文件的位置
+		WWW:     项目代码存放位置
+	c.启动phpstudy
+	d.检查服务和端口
+		apache
+			主服务:httpd
+			端口:  80
+			win+r--cmd--tasklist | find "httpd"
+			tasklist 查看当前系统所有进程
+			|        管道，前面的输出作为后面的输入
+			find     搜索
+			win+r--cmd--netstat -an | find "80"
+			netstat -an  查看系统开放的所有端口
+			0.0.0.0   任意IP
+			127.0.0.1、localhost 电脑本机
+		mysql
+			主服务:mysqld
+			端口:  3306
+			tasklist | find "mysqld"
+			netstat -an | find "3306
+	e.下载ecshop压缩包，解压后ecshop1文件夹传入WWW文件夹中
+	f.浏览器中输入127.0.0.1/ecshop1按照提示安装
+		配置系统注意:
+		数据库主机:localhost
+		端口号    ：3306
+		用户名    ：root
+		密码      ：root
+		数据库名   :test
+任务:
+	准备:手动注册一个用户
+	1.登录用户(刚才注册用户)
+	2.搜索框搜索KD876
+	3.进入商品详情页
+	4.立即购买
+	5.去结算
+	6.选择快递等等
+	7.余额不足(完成)
+
+
+
+
