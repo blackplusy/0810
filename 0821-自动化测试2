@@ -39,3 +39,55 @@
 			find_element_by_css_selector("input[class^='s_']")
 			匹配属性为某个字符串结尾的方法
 			find_element_by_css_selector("input[class$='pt']")
+4.框架切换
+	1.切换框架到frame中(switch_to.frame(参数))
+		参数可以用来定位frame，传入id，name等等
+			from xxx  import xx
+			br=webdriver.Chrome()
+			br.switch_to.frame(参数)
+	2.从frame切换到主文档
+		切换frame中，不能继续操作主文档中的元素，如果想进行操作，需要切回主文档
+			br.switch_to.default_content()
+	3.嵌套frame的操作
+		开发时候会出现嵌套frame的情况
+			1>主文档切换到frame2，一层一层进入
+				br.switch_to.frame("frame1")
+				br.switch_to.frame("frame2")
+			2>子frame切换到父frame
+				相当于后退
+				br.switch_to.parent_frame()
+	总结:
+		switch_to.frame()
+		switch_to.default_content()
+		switch_to.parent_frame()
+5.xpath定位
+	xpath定位参考语法
+	https://www.w3school.com.cn/xpath/xpath_syntax.asp
+	针对于xml的路径语言，通过元素的路径来找
+	1.工具
+		火狐FireBug
+		F12
+	2.用法
+		/  绝对路径，根节点选取元素
+		// 相对路径,所有子节点中搜素对应元素
+		@  选取属性
+		.  当前节点
+		.. 当前节点的父节点
+		注意:通过浏览器的F12的console中可以进行调试$x()
+		1.xpath支持id\class\name定位
+			id:
+			x("//*[@id='kw']")
+			$x("//input[@id='kw']")
+			class:
+			$x("//*[@class='s_ipt']")
+			name:
+			$x("//*[@name='wd']")
+		2.如果没有id\class\name，xpath支持其他属性定位
+			$x("//*[@autocomplete='off']")
+		3.通过层级关系定位元素
+			$x("//a[@class='mnav c-font-normal c-color-t'][1]")
+			$x("/html/body/div[1]/div[1]")
+		4.xpath的运算符
+			and 同时满足条件
+			or  满足一个条件即可
+			$x("//a[@class='mnav c-font-normal c-color-t' and @href='https://www.hao123.com']")
