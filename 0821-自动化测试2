@@ -42,7 +42,7 @@
 4.框架切换
 	1.切换框架到frame中(switch_to.frame(参数))
 		参数可以用来定位frame，传入id，name等等
-			from xxx  import xx
+			from selenium  import webdriver
 			br=webdriver.Chrome()
 			br.switch_to.frame(参数)
 	2.从frame切换到主文档
@@ -91,3 +91,58 @@
 			and 同时满足条件
 			or  满足一个条件即可
 			$x("//a[@class='mnav c-font-normal c-color-t' and @href='https://www.hao123.com']")
+6.下拉框
+	1.html代码如下
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<select id="select">
+			<option name="1" value="10">张大仙</option>
+			<option name="2" value="20">蓝烟</option>
+			<option name="3" value="30">大锤</option>
+		</select>
+	</body>
+	</html>
+	下拉框的处理
+	#1.通过send_keys()
+	time.sleep(2)
+	# br.find_element_by_id("select").send_keys("蓝烟")
+	#2.通过二次操作
+	# br.find_element_by_id("select").find_element_by_xpath("//*[@value='30']").click()
+	#3.select用法(导入select库)
+	#a.实例化select类对象
+	selector=Select(br.find_element_by_id("select"))
+	#b.通过index索引进行选择，索引从0开始
+	# selector.select_by_index("2")
+	#c.通过value值进行选择
+	# selector.select_by_value("20")
+	#d.通过标签显示的文本进行选择
+	selector.select_by_visible_text("大锤")
+7.文件的上传和下载
+	a.文件的上传
+		2.html：
+		<!DOCTYPE html>
+		<html>
+		<head>
+			<title></title>
+		</head>
+		<body>
+			<input type="file" name="file">
+		</body>
+		</html>
+		通过send_keys进行上传
+		br.find_element_by_name("file").send_keys("F:\\1.txt")
+	b.文件的下载
+		通过单击下载链接进行下载
+		br.get("https://pypi.org/project/PyMySQL/0.8.1/#files")
+		br.find_element_by_link_text("PyMySQL-0.8.1.tar.gz").click()
+8.任务
+	1.登录到ecshop的后台 http://xxx.xxx.xxx.xxx/ecshop1/admin
+	2.添加新商品
+	3.搜索出新商品
+
+
