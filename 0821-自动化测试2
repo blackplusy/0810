@@ -1,148 +1,289 @@
-1.selenium家族
-	selenium 1.0(rc)  过去式
-	selenium IDE(集成开发环境)
-	selenium webdriver(重点)
-	selenium grid(分布式自动化测试工具，可以在多个测试环境中并发执行，缩短测试脚本执行时间)
-2.webdriver驱动原理
-	大概过程:执行脚本，webdriver会启动一个新的线程去启动一个浏览器，浏览器可以理解为服务器，脚本是客户端，通过脚本操作浏览器，脚本发送一个请求给卢兰其，浏览器处理后返回给脚本
-	webdrvier3个角色：
-		1.自动化测试代码
-		2.浏览器的驱动
-		3.浏览器
-3.css定位
-	a.单一属性定位
-		a1.标签选择器
-			F12中console--->$("input") 查看页面中的input标签
-			find_element_by_css_selector('input')
-		a2.id定位
-			$("#kw")
-			find_element_by_css_selector("#kw")
-		a3.class定位
-			$(".s_ipt")
-			find_element_by_css_selector(".s_ipt")
-		a4.其他属性定位
-			$("[name='wd']")
-			find_element_by_css_selector("[name='wd']")
-	b.组合属性定位
-		b1.id组合属性定位
-			find_element_by_css_selector("input#kw")
-		b2.class组合属性定位
-			find_element_by_css_selector("input.s_ipt")
-		b3.其他属性组合
-			find_element_by_css_selector("input[name='wd']")
-		b4.只有属性名，没有值也可以
-			find_element_by_css_selector("input[autocomplete]")
-		b5.两个其他属性组合
-			find_element_by_css_selector('[name="wd"][autocomplete]')
-		b6.模糊匹配定位
-			匹配属性为某个字符串开头的方法
-			find_element_by_css_selector("input[class^='s_']")
-			匹配属性为某个字符串结尾的方法
-			find_element_by_css_selector("input[class$='pt']")
-4.框架切换
-	1.切换框架到frame中(switch_to.frame(参数))
-		参数可以用来定位frame，传入id，name等等
-			from selenium  import webdriver
-			br=webdriver.Chrome()
-			br.switch_to.frame(参数)
-	2.从frame切换到主文档
-		切换frame中，不能继续操作主文档中的元素，如果想进行操作，需要切回主文档
-			br.switch_to.default_content()
-	3.嵌套frame的操作
-		开发时候会出现嵌套frame的情况
-			1>主文档切换到frame2，一层一层进入
-				br.switch_to.frame("frame1")
-				br.switch_to.frame("frame2")
-			2>子frame切换到父frame
-				相当于后退
-				br.switch_to.parent_frame()
-	总结:
-		switch_to.frame()
-		switch_to.default_content()
-		switch_to.parent_frame()
-5.xpath定位
-	xpath定位参考语法
-	https://www.w3school.com.cn/xpath/xpath_syntax.asp
-	针对于xml的路径语言，通过元素的路径来找
-	1.工具
-		火狐FireBug
-		F12
-	2.用法
-		/  绝对路径，根节点选取元素
-		// 相对路径,所有子节点中搜素对应元素
-		@  选取属性
-		.  当前节点
-		.. 当前节点的父节点
-		注意:通过浏览器的F12的console中可以进行调试$x()
-		1.xpath支持id\class\name定位
-			id:
-			x("//*[@id='kw']")
-			$x("//input[@id='kw']")
-			class:
-			$x("//*[@class='s_ipt']")
-			name:
-			$x("//*[@name='wd']")
-		2.如果没有id\class\name，xpath支持其他属性定位
-			$x("//*[@autocomplete='off']")
-		3.通过层级关系定位元素
-			$x("//a[@class='mnav c-font-normal c-color-t'][1]")
-			$x("/html/body/div[1]/div[1]")
-		4.xpath的运算符
-			and 同时满足条件
-			or  满足一个条件即可
-			$x("//a[@class='mnav c-font-normal c-color-t' and @href='https://www.hao123.com']")
-6.下拉框
-	1.html代码如下
-	<!DOCTYPE html>
-	<html>
-	<head>
-		<title></title>
-		<meta charset="utf-8">
-	</head>
-	<body>
-		<select id="select">
-			<option name="1" value="10">张大仙</option>
-			<option name="2" value="20">蓝烟</option>
-			<option name="3" value="30">大锤</option>
-		</select>
-	</body>
-	</html>
-	下拉框的处理
-	#1.通过send_keys()
-	time.sleep(2)
-	# br.find_element_by_id("select").send_keys("蓝烟")
-	#2.通过二次操作
-	# br.find_element_by_id("select").find_element_by_xpath("//*[@value='30']").click()
-	#3.select用法(导入select库)
-	#a.实例化select类对象
-	selector=Select(br.find_element_by_id("select"))
-	#b.通过index索引进行选择，索引从0开始
-	# selector.select_by_index("2")
-	#c.通过value值进行选择
-	# selector.select_by_value("20")
-	#d.通过标签显示的文本进行选择
-	selector.select_by_visible_text("大锤")
-7.文件的上传和下载
-	a.文件的上传
-		2.html：
-		<!DOCTYPE html>
-		<html>
-		<head>
-			<title></title>
-		</head>
-		<body>
-			<input type="file" name="file">
-		</body>
-		</html>
-		通过send_keys进行上传
-		br.find_element_by_name("file").send_keys("F:\\1.txt")
-	b.文件的下载
-		通过单击下载链接进行下载
-		br.get("https://pypi.org/project/PyMySQL/0.8.1/#files")
-		br.find_element_by_link_text("PyMySQL-0.8.1.tar.gz").click()
-8.任务
-	1.登录到ecshop的后台 http://xxx.xxx.xxx.xxx/ecshop1/admin
-	2.添加新商品
-	3.搜索出新商品
+hostname
+who
+whoami
+pwd
+cd
+ls
+man
+info
+ifconfig
+ping
+setup
+service
+mkdir
+tree
+cp
+mv
+rm
+touch
+echo
+cat
+less
+more
+head
+tail
+vi
+=======================================
+1.远程连接和远程拷贝
+	远程链接
+	ssh 192.168.4.44
+	ssh root@192.168.4.44 
+		管理员远程登录IP为192.168.4.44的主机
+	远程拷贝
+	scp 
+	scp -r 192.168.5.207:/root/*  .
+		远程拷贝主机192.168.5.207下的/root目录下所有文件到当前目录
+	 scp /etc/passwd 192.168.5.207:/root
+	 	远程拷贝当前主机下的/etc/passwd文件到主机 192.168.5.207的/root目录下
+2.IP地址设置
+	a.命令(setup)
+	b.临时设置(ifconfig)
+		ifconfig eth0 192.168.4.220
+			临时设置eth0网卡IP地址为192.168.4.220
+		重启网络失效
+	c.修改配置文件（推荐）
+		vim /etc/sysconfig/network-scripts/ifcfg-eth0
+			DEVICE=eth0                   设备名称
+			BOOTPROTO=static              启动协议(获取IP的方式【static、dhcp】)
+			HWADDR=00:0c:29:91:c9:36      网卡的mac地址
+			ONBOOT=yes                    网卡是否随开机启动而启动
+			NETMASK=255.255.254.0         子网掩码
+			IPADDR=192.168.4.44           IP地址
+			TYPE=Ethernet                 上网类型
+		重启网络后生效
+			service network restart
+3.主机名设置
+	a.查看主机名
+		hostname
+	b.临时修改
+		hostname heygor.memeda.com
+		重启系统后失效
+	c.修改配置文件
+		vim /etc/sysconfig/network
+		HOSTNAME=heygor.memeda.com
+		重启系统后生效
+		init 6
+4.绑定主机名
+	vim /etc/hosts
+		追加
+		192.168.4.44    heygor.memeda.com  
+5.关闭防火墙
+	service iptables status  
+		查看防火墙状态
+	service iptables stop
+		关闭防火墙
+	service iptables start
+		开启防火墙
+6.关闭selinux
+	a.查看selinux状态
+		getenforce
+	b.临时关闭selinux
+		setenforce 0
+	c.修改配置文件
+		vim /etc/selinux/config
+			SELINUX=disabled
+7.包、压缩文件、压缩包
+	包：打包(tar)
+		包文件通常以.tar结尾
+		tar -cvf test.tar Desktop/ install.log*
+			创建包文件test.tar，打包内容Desktop目录和install.log开头的文件
+		tar -tvf test.tar
+			查看包文件test.tar中的文件属性信息
+		tar -xvf test.tar
+			解包到当前目录下
+		tar -xvf test.tar -C /opt/
+			解包包文件test.tar到/opt目录下，指定目录需要加-C
+	压缩文件	(gzip)
+		一般来说压缩文件都是以.gz结尾
+		du -sh install.log
+			查看install.log文件大小
+		gzip install.log
+			压缩文件install.log
+		gzip -l install.log.gz
+			查看压缩文件的压缩属性信息
+		gzip -d install.log.gz
+			解压压缩包到当前目录下
+	压缩包(tar)
+		压缩包文件通常以.tar.gz结尾或者以.tgz结尾
+		先打包，后压缩
+		tar -cvf test1.tar anaconda-ks.cfg
+		gzip test1.tar
+		---------------------------------------
+		tar -czvf test2.tgz 1.log test123
+			创建压缩包文件test2.tgz打包压缩内容 1.log test123
+		tar -tzvf test2.tgz
+			查看压缩包文件test2.tgz中文件属性信息
+		tar -xzvf test2.tgz
+			解压压缩包文件test2.tgz到当前目录下
+	tar -xzvf VMwareTools-10.3.10-12406962.tar.gz -C /opt/
+	cd /opt
+	cd vmware-tools-distrib/
+	./vmware-install.pl
+8.用户和权限
+	a.用户操作
+		/etc/passwd    用户配置文件
+		/etc/shadow    用户的密码配置文件
+		/etc/group     用户的组信息
+		1>创建用户
+			useradd simon
+				创建用户simon
+			passwd simon
+				给simon用户设置密码
+		2>修改用户
+			usermod -L simon
+				锁定用户simon
+			usermod -U simon
+				解锁用户simon
+		3>删除用户
+			userdel -r simon
+				删除simon用户
+	b.权限
+		1>查看权限
+			ll install.log
+			-rw-r--r-- 1 root root 35269 08-25 02:34 install.log
+			1.文件类型
+				d:目录
+				-:普通文件
+			2-10.文件权限
+			11.文件节点
+			12.拥有者
+			13.拥有组
+			14.文件大小
+			15.最后修改时间
+			16.文件名字
+		2>常用权限
+			r:读
+				目录：可以列表
+				文件:可以查看内容
+			w：写
+				目录:可以新建、重命名、删除文件
+				文件:可以修改文件内容
+			x:执行
+				目录:可以进入
+				文件:可执行(二进制文件或者脚本文件)
+		3>权限分组
+			rw-        r--         r-- 
+			拥有者     拥有组      其他人
+		4>系统判断权限的过程
+			1.判断是否是文件拥有者，如果是，赋予权限
+			2.判断是否是文件拥有组成员，如果是，赋予权限
+				id simon
+				查看simon用户的组信息
+			3.如果都不是赋予其他人权限
+		5>修改权限
+			1.chmod 直接修改权限
+				1>字符
+					u 	拥有者
+					g   拥有组
+					o   其他人
+					a   所有人
+					chmod u+x install.log 
+						拥有者增加执行权限
+					chmod g+x,o+x install.log
+						拥有组和其他人增加执行权限
+					chmod a-x install.log
+						所有人取消执行权限
+				2>数字
+					r:4
+					w:2
+					x:1
+					-:0
+					chmod 777 install.log
+						所有用户拥有读写执行权限
+					chmod 000 install.log
+						所有用户没有任何权限
+			2.chown 通过修改文件属主来修改权限
+				chown simon install.log
+					修改文件拥有者为simon
+				chown :bin install.log
+					修改文件拥有组bin
+				chown root:root install.log
+					修改文件拥有者和拥有组为root
+
+9.搜索和管道
+	a.搜索
+		find    搜索文件
+			find /etc/ -name conf
+				/etc/目录下搜索名字是conf的文件
+			find /etc/ -name *.conf
+				/etc/目录下搜索名字以.conf结尾的文件
+		locate  搜文件
+			locate passwd
+				系统中搜索passwd相关内容
+		updatedb
+			刷新系统数据库
+		grep    搜内容
+			 grep root /etc/passwd
+			 	/etc/passwd中搜索包含root关键字的行
+			 grep ^r /etc/passwd
+			 	/etc/passwd中搜索以r开头的行
+			 grep bash$ /etc/passwd
+			 	/etc/passwd中搜索以bash结尾的行
+	b.管道
+		|
+		前面的输出作为后面的输入
+		ls /etc/ |grep conf$
+			搜索/etc/目录下以conf结尾的文件
+		head -7 install.log|tail -1
+			查看文件第7行数据
+10.管理命令
+	top
+		监控系统资源
+	pidof
+		查看进程的pid
+		pidof sshd
+		process of id 进程id
+	kill -9   pid   暴力杀
+		 -15  pid   温柔杀
+	ps -ef
+		查看系统当前所有进程
+			ps -ef |grep httpd    查看apache进程是否正常运行
+			ps -ef |grep mysqld   查看mysqld进程是否正常运行
+			ps -ef |grep tomcat   查看tomcat进程是否正常运行
+			ps -ef |grep oracle   查看oracle进程是否正常运行
+	netstat -ntlup
+		查看系统中开放的所有端口
+			netstat -an |grep 80    查看apache端口是否正常运行
+			netstat -an |grep 8080  查看tomcat端口是否正常运行
+			netstat -an |grep 1521  查看oracle端口是否正常运行
+			netstat -an |grep 3306  查看mysql端口是否正常运行
+	lsof -i:22
+		查看22号端口当前连接信息
+	df -h
+		查看磁盘使用率
+	mount
+		查看磁盘挂载情况
+	vmstat
+		监控系统资源
+	ifconfig
+		监控网络资源
+	init 系统默认运行级别
+		init 0  关机
+		init 3  进入到字符模式
+		init 5  进入到图形模式
+		init 6  重启
+	chkconfig --list
+		查看开机启动任务列表
+		chkconfig --list |grep iptables
+			查看开机列表中防火墙信息
+		chkconfig --level 35 iptables off
+			关闭运行级别3和5中防火墙
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
