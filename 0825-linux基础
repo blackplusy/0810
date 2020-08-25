@@ -200,37 +200,74 @@ vi
 				chown root:root install.log
 					修改文件拥有者和拥有组为root
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-9.管理命令
-
+9.搜索和管道
+	a.搜索
+		find    搜索文件
+			find /etc/ -name conf
+				/etc/目录下搜索名字是conf的文件
+			find /etc/ -name *.conf
+				/etc/目录下搜索名字以.conf结尾的文件
+		locate  搜文件
+			locate passwd
+				系统中搜索passwd相关内容
+		updatedb
+			刷新系统数据库
+		grep    搜内容
+			 grep root /etc/passwd
+			 	/etc/passwd中搜索包含root关键字的行
+			 grep ^r /etc/passwd
+			 	/etc/passwd中搜索以r开头的行
+			 grep bash$ /etc/passwd
+			 	/etc/passwd中搜索以bash结尾的行
+	b.管道
+		|
+		前面的输出作为后面的输入
+		ls /etc/ |grep conf$
+			搜索/etc/目录下以conf结尾的文件
+		head -7 install.log|tail -1
+			查看文件第7行数据
+10.管理命令
+	top
+		监控系统资源
+	pidof
+		查看进程的pid
+		pidof sshd
+		process of id 进程id
+	kill -9   pid   暴力杀
+		 -15  pid   温柔杀
+	ps -ef
+		查看系统当前所有进程
+			ps -ef |grep httpd    查看apache进程是否正常运行
+			ps -ef |grep mysqld   查看mysqld进程是否正常运行
+			ps -ef |grep tomcat   查看tomcat进程是否正常运行
+			ps -ef |grep oracle   查看oracle进程是否正常运行
+	netstat -ntlup
+		查看系统中开放的所有端口
+			netstat -an |grep 80    查看apache端口是否正常运行
+			netstat -an |grep 8080  查看tomcat端口是否正常运行
+			netstat -an |grep 1521  查看oracle端口是否正常运行
+			netstat -an |grep 3306  查看mysql端口是否正常运行
+	lsof -i:22
+		查看22号端口当前连接信息
+	df -h
+		查看磁盘使用率
+	mount
+		查看磁盘挂载情况
+	vmstat
+		监控系统资源
+	ifconfig
+		监控网络资源
+	init 系统默认运行级别
+		init 0  关机
+		init 3  进入到字符模式
+		init 5  进入到图形模式
+		init 6  重启
+	chkconfig --list
+		查看开机启动任务列表
+		chkconfig --list |grep iptables
+			查看开机列表中防火墙信息
+		chkconfig --level 35 iptables off
+			关闭运行级别3和5中防火墙
 
 
 
