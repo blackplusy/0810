@@ -82,6 +82,56 @@ vi
 	c.修改配置文件
 		vim /etc/selinux/config
 			SELINUX=disabled
+7.包、压缩文件、压缩包
+	包：打包(tar)
+		包文件通常以.tar结尾
+		tar -cvf test.tar Desktop/ install.log*
+			创建包文件test.tar，打包内容Desktop目录和install.log开头的文件
+		tar -tvf test.tar
+			查看包文件test.tar中的文件属性信息
+		tar -xvf test.tar
+			解包到当前目录下
+		tar -xvf test.tar -C /opt/
+			解包包文件test.tar到/opt目录下，指定目录需要加-C
+	压缩文件	(gzip)
+		一般来说压缩文件都是以.gz结尾
+		du -sh install.log
+			查看install.log文件大小
+		gzip install.log
+			压缩文件install.log
+		gzip -l install.log.gz
+			查看压缩文件的压缩属性信息
+		gzip -d install.log.gz
+			解压压缩包到当前目录下
+	压缩包(tar)
+		压缩包文件通常以.tar.gz结尾或者以.tgz结尾
+		先打包，后压缩
+		tar -cvf test1.tar anaconda-ks.cfg
+		gzip test1.tar
+		---------------------------------------
+		tar -czvf test2.tgz 1.log test123
+			创建压缩包文件test2.tgz打包压缩内容 1.log test123
+		tar -tzvf test2.tgz
+			查看压缩包文件test2.tgz中文件属性信息
+		tar -xzvf test2.tgz
+			解压压缩包文件test2.tgz到当前目录下
+	tar -xzvf VMwareTools-10.3.10-12406962.tar.gz -C /opt/
+	cd /opt
+	cd vmware-tools-distrib/
+	./vmware-install.pl
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
