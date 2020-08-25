@@ -269,6 +269,38 @@ vi
 		chkconfig --level 35 iptables off
 			关闭运行级别3和5中防火墙
 
+11.linux下的软件安装
+	a.软件安装基础
+		安装方式
+		1>rpm安装(手动安装)
+		2>yum安装(自动安装)
+		3>源码安装
+		4>二进制文件安装
+		安装时候所需软件通常在光盘的Server目录下
+		软件安装包都是以.rpm结尾
+	b.rpm安装(vsftpd服务安装)
+		1>安装操作系统
+		2>配置IP地址、主机名、绑定主机名
+		3>关闭防火墙、关闭selinux
+		4>加载光驱
+			右键标签--设置--cd/dvd--已连接、启动时链接--使用iso映像文件--选择安装光盘(rhel....iso)
+		5>输入mount命令搜索type是iso9660的对应目录
+			type是iso9660说明是光盘、光驱等等
+		6>目录切换到对应目录的Server目录下
+			 cd /media/RHEL_5.4\ i386\ DVD/Server/
+		7>搜索vsftpd相关软件
+			ls |grep vsftpd
+		8>安装vsftpd相关软件
+			 rpm -ivh vsftpd-2.0.5-16.el5.i386.rpm
+		9>启动vsftpd服务
+			service vsftpd start
+		10>测试
+			浏览器中输入ftp://linux的IP
+			补充：共享文件可以把文件复制到/var/ftp目录下
+		11>映射网络磁盘
+			添加一个网络位置
+			输入ftp://linux的IP
+			
 
 
 
