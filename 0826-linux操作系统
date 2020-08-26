@@ -132,7 +132,44 @@ rpm
 		3)检查mongodb的进程和端口
 			ps -ef |grep mongod
 			netstat -an | grep 27017
-			
+3.jdk的安装和配置
+	a.jdk的下载
+		建议:oracle官网
+		jdk:java的开发环境
+		jre:java的运行环境
+	b.把下载好的jdk压缩包传入linux中
+	c.解压压缩包
+		 tar -xzvf jdk-7u7-linux-i586.tar.gz
+	d.查看当前java的版本
+		java -version
+	e.设置环境变量
+		JAVA_HOME=/root/jdk1.7
+		PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH:$HOME/bin:/root/mongodb/bin
+	f.使环境变量生效
+		source .bash_profile
+4.tomcat的安装和配置
+	a.tomcmat下载
+	b.把tomcat压缩包传入linux中
+	c.解压tomcat压缩包
+		 tar -xzvf apache-tomcat-7.0.96.tar.gz
+	d.tomcat目录简介
+		bin 	存放tomcat命令的位置
+		conf    存放tomcat配置文件的位置
+		lib     存放库文件的位置
+		logs    存放系统日志文件的位置
+		webapps 项目代码所在位置
+		temp    存放临时文件的位置
+	e.启动tomcat服务器
+		1>进入到tomcat的bin目录下
+			cd /root/apache-tomcat-7.0.96/bin/
+		2>执行./startup.sh
+			./startup.sh
+	f.检查
+		ps -ef |grep tomcat
+		netstat -an |grep 8080
+		浏览器中输入http://linux的IP:8080
+		
+
 
 
 
