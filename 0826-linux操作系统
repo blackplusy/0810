@@ -108,3 +108,31 @@ rpm
 			http://linux的IP/ecshop1  			前台
 			http://linux的IP/ecshop1/admin   	后台
 
+2.二进制文件安装
+	mongodb的linux中部署
+	1>安装操作系统
+	2>配置IP地址、主机名、绑定主机名
+	3>下载mongodb压缩包(Q群)
+	4>把mongodb通过winscp传入linux中
+	5>解压压缩包
+		tar -xzvf mongodb-linux-i686-2.4.9.tgz
+	6>linux中设置环境变量
+		/etc/profile
+		~/.bashrc或者~/.bash_profile
+		PATH后面添加mongodb的bin目录的路径
+		PATH=$PATH:$HOME/bin:/root/mongodb/bin
+	7>使环境变量生效
+		source .bash_profile
+	8>启动mongodb
+		1)mkdir /data
+		2)mongod --dbpath /data --logpath /data/mongo.log --fork
+			dbpath  数据存放路径
+			logpath 日志存放位置
+			fork    后台执行
+		3)检查mongodb的进程和端口
+			ps -ef |grep mongod
+			netstat -an | grep 27017
+			
+
+
+
