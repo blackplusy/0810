@@ -1,0 +1,110 @@
+0826.txt
+who
+whoami
+pwd
+cd
+tree
+ls
+man
+info
+setup
+ping
+service
+ifconfig
+mkdir
+rm
+cp
+mv
+touch
+echo
+cat
+less
+more
+head
+tail
+vi
+tar
+du
+gzip
+useradd
+usermod
+userderl
+chmod
+chown
+top
+ps
+netstat
+vmstat
+lsof
+df
+mount
+chkconfig
+init
+find
+locate
+grep
+kill
+rpm
+======================================
+1.自动安装(yum)
+	a.ecshop项目部署
+		1>安装操作系统
+		2>配置IP、主机名、绑定主机名
+		3>关闭防火墙、selinux
+		4>配置yum
+			1)加载光驱
+				右键标签--设置--cd/dvd/--使用iso映像文件
+			2)创建一个空目录用于挂载
+				mkdir /yum
+			3)挂载光驱
+				mount -o loop /dev/scd0 /yum
+				如果是光盘类型挂载需要加参数 -o loop
+			4)检查
+				mount命令中搜索type是iso9660的目录
+			5)修改yum的配置文件
+				cd /etc/yum.repos.d/
+				vim xxx.repo
+				[rhel]
+				name=test
+				baseurl=file:///yum/Server    自动安装程序到哪里去找软件包
+				enabled=1                     是否开启自动安装1是开启，0是关闭
+				gpgcheck=0                    是否检查光盘，0是关闭，1是开启
+			6)清理yum缓存
+				yum clean all
+			7)查看可以自动安装的软件列表
+				yum list
+		5>ecshop的环境
+			开发语言:    	php
+			web服务器:   	apache
+			数据库服务器：   mysql
+			LAMP: linux apache mysql php
+		6>安装php相关软件
+			yum install php* -y
+				-y 自动安装软件依赖包
+		7>安装apache相关软件
+			yum install http* -y
+		8>安装mysql相关软件
+			yum install mysql* -y
+		9>启动服务
+			service mysqld start
+			service httpd start
+		10>检查服务和端口
+			ps -ef |grep httpd
+			ps -ef |grep mysqld
+			netstat -an |grep 3306
+			netstat -an |grep 80
+		11>下载解压ecshop压缩包
+		12>通过winscp把解压后的文件夹传入/var/www/html目录中
+		13>赋予目录777权限
+			chmod 777 -R /var/www/html/ecshop1		
+		14>浏览器中输入http://linux的IP/ecshop1
+			数据库账号
+			数据库主机:  localhost
+			端口号:      3306
+			用户名:      root
+			密码:            
+			数据库名:    test
+		15>访问
+			http://linux的IP/ecshop1  			前台
+			http://linux的IP/ecshop1/admin   	后台
+
