@@ -57,6 +57,58 @@ TEL:        18028768679
 			oracle
 			mysql
 			sqlserver
+3.访问网站的过程
+	a.浏览器中输入www.sina.com.cn
+	b.系统到hosts文件中搜索是否有www.sina.com.cn对应的IP地址。如果有，直接进行访问(非重点)
+	c.如果没有的话，数据通过网络发送到DNS服务器(域名解析)，解析域名为IP地址
+	d.数据通过网络发送到目标IP的web服务器中进行解析
+	e.web服务器解析后发送请求数据给数据库服务器，给我我要的数据
+	f.数据库服务器向响应web服务器的请求
+	g.web服务器整合资源后把数据发回到浏览器中
+4.URL(统一资源定位器)
+	http://sports.sina.com.cn:80/slamdunk/live.shtml?id=2020083126
+	a.协议   http://
+		一组规则规范
+		http协议(超文本传输协议)
+		规定了数据先传输什么后传输什么，怎样传输
+		超文本(富文本):声音、图像、视频
+		http协议特点：无状态(彼此不记录过去的行为)
+		http协议的请求
+			get：我要什么，主要用于浏览，请求的信息显示在URL上，相对不安全
+				https://s.taobao.com/search?q=lv&imgfile=&commend=all&ssid=s5-e&search_type=item&sourceId=tb.index&spm=a21bo.2017.201856-taobao-item.1&ie=utf8&initiative_id=tbindexz_20170306
+				https://s.taobao.com/search?q=zara&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20200831&ie=utf8
+			post：我给什么，主要用于提交，请求信息显示在请求体中，相对安全
+		cookie&session
+			cookie  存放客户端中，验证机制，访问记录   定投广告
+			session 存放在服务端中，验证机制  会话保持、30分钟超时
+		状态码
+			200    2开头请求成功
+			302    3开头移动或者缓存，重定向
+			404    4开头客户端请求有问题
+			500    5开头服务端有问题
+	b.域名   sports.sina.com.cn
+		FQDN(完全合格域名)
+		DNS(域名解析服务器)
+			正向解析(域名--->IP)
+				1>win+r--cmd--ping www.baidu.com
+				2>win+r--cmd--nslookup www.baidu.com
+			反向解析(IP--->域名)
+				win+r--cmd--nslookup  14.215.177.39
+	c.端口   :80 （80端口在浏览器中不显示）
+		应用层区分程序的标识
+			apache/nginx/iis   80
+			tomcat            8080
+			mysql             3306
+			oracle            1521
+			查看系统中开放的所有端口
+				win+r--cmd--netstat -an
+					netstat -an | find "135" 查看135端口是否正常运行
+			0.0.0.0                 任意IP地址
+			127.0.0.1==localhost    电脑本机
+
+	d.虚拟目录 slamdunk
+	e.访问文件 live.shtml
+	f.访问文件使用参数 ?id=2020083126
 
 
 
