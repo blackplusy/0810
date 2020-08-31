@@ -1,0 +1,62 @@
+
+HeyGor
+QQ、WECHAT:  914338492
+TEL:        18028768679
+==========================
+1.常见的软件架构
+	QQ       c/s  
+	微信      c/s   b/s
+	微博      c/s   b/s
+	抖音      c/s
+	淘宝      c/s   b/s
+	支付宝    c/s   b/s
+	网易云音乐 c/s   b/s    
+	高德      c/s   b/s
+	快播      c/s   b/s
+	爱奇艺    c/s   b/s
+	b站       c/s   b/s
+	LOL       c/s  
+	真三国无双  c/s
+	a.单机软件
+		不需要网络就可以执行的应用程序
+		defcon       
+		hackercon
+	b.b/s架构软件
+		b:浏览器
+			IE       360     baidu     世界之窗     搜狗     UC   edge
+			chrome   开发  
+			firefox  测试   
+			safari   
+		s:服务器
+			性能特别牛逼的电脑
+	c.c/s架构软件
+		c:客户端
+			pc端     电脑 服务器
+			移动端   手机  ipad  智能终端
+		s:服务器
+			性能特别牛逼的电脑
+
+2.前端和后端
+	前端
+		html  标记性语言  静态页面(在服务器上什么样，在浏览器上什么样子) 
+		js    JavaScript  动态页面(动画、交互)  前端开发    框架（jquery）  vue react node
+			  java        后端
+			  jsp         java server page
+		css   页面美化
+		ui    用户接口、美工
+	b/s后端
+		操作系统
+			unix
+			linux
+			windows
+		web服务器
+			apache
+			tomcat
+			nginx
+		数据库服务器
+			oracle
+			mysql
+			sqlserver
+
+
+
