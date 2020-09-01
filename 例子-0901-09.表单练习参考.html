@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.a {
+			outline-style: none;  /*清除class是a的标签的outline样式*/
+			width: 250px;         /*设置input输入框的宽度是250px*/
+		}
+		a {
+			text-decoration: none; /*清除a标签的文字样式*/
+			color: white;
+		}
+		div {
+			background-color: red; /*背景颜色红色*/
+			width: 100px;          /*div标签宽度*/
+			height: 30px;        /*  div标签高度*/
+			text-align: center; /* 文字水平居中*/
+			line-height: 30px;  /*文字垂直居中*/
+			border-radius: 30px; /*边框翻转*/
+		}
+	</style>
+</head>
+<body>
+	<form action="test.php">
+	<table >
+		<tr>
+			<td>手机号码</td>
+			<td colspan="3"><input type="text" name="text" class="a" placeholder="请输入用户名"></td>
+		</tr>
+		<tr>
+			<td>登录密码</td>
+			<td colspan="3"><input type="text" name="text" class="a"></td>
+		</tr>
+		<tr>
+			<td>确认密码</td>
+			<td colspan="3"><input type="text" name="text" class="a"></td>
+		</tr>
+		<tr>
+			<td>确认密码</td>
+			<td><input type="text" name="text"></td>
+			<td><img src="../3.jpg" width="30px" height="15px"></td>
+			<td>换张图</td>
+		</tr>
+	</table>
+		<div>
+			<a href="#">点击注册</a>
+		</div>
+	</form>
+
+</body>
+</html>
